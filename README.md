@@ -1,17 +1,4 @@
-------------------------------------------
-input fields
 
-validate functions - completed
-
-data-target - completed
-
-event handlers completed
-
-initialize repository
-
-responsive
-
-------------------------------------------
 
 υπολογισμός απόστασης από σε ένα σημείο σε ένα άλλο με βάση την ταχύτητα και τον χρόνο
 
