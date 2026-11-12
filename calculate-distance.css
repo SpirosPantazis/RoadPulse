@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*--------------- MAIN RULES */
+
+:root {
+    --bg-body:        #020617;
+    --text-strong:    #fbfafc;
+    --text-muted:     #94a3b8;          /* slate 400 — AA στο #0f172a */
+
+    --bg-component:   #0f172a;
+    --border-component: #1e293b;        /* ένα level πάνω από το card */
+    --shadow-component: 0 1px 2px rgba(0,0,0,.4),
+                        0 12px 32px rgba(0,0,0,.45);
+
+    /* ---------- INPUTS ---------- */
+    --bg-input:       #1e293b;
+    --text-input:     #e2e8f0;          /* λευκο-γκρι, καθαρό στο σκούρο */
+    --border-input:   #334155;          /* slate 700 — διακριτικό περίγραμμα */
+    --border-input-focus: #10b981;      /* accent = calculate button */
+    --ring-focus:     rgba(16,185,129,.22);
+    --text-placeholder: #64748b;
+
+    /* ---------- TOGGLE BUTTONS ---------- */
+    --bg-toggle:          #1e293b;
+    --text-toggle:        #94a3b8;      /* inactive */
+    --bg-toggle-hover:    #273449;      /* hover πριν το active */
+    --bg-toggle-active:   #10b981;      /* ίδιο accent → ενιαίο look */
+    --text-toggle-active: #022c22;      /* σκούρο πράσινο, AA πάνω σε emerald */
+
+    /* ---------- CALCULATE BUTTON ---------- */
+    --bg-btn-calc:        #10b981;
+    --text-btn-calc:      #022c22;      /* σκούρο κείμενο > λευκό για αντίθεση */
+    --bg-btn-calc-hover:  #0ea371;      /* ~8% πιο σκούρο */
+    --bg-btn-calc-active: #0b8a60;
+    --shadow-btn-calc:    0 6px 18px rgba(16,185,129,.28);
+}
+
+    /* --------------- MAIN RULES */
+
+body {
+    background-color: var(--bg-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+    body .container {
+        display: grid;
+        grid-template-rows: auto;
+        background-color: var(--bg-component);
+        border: 1px solid var(--border-colour);
+        border-radius: 12px; 
+        box-shadow: 0 1px 2px rgba(0,0,0,.4),
+                0 12px 32px rgba(0,0,0,.45);
+        padding: 24px;
+        max-width: 500px;
+        height: 450px;
+    } 
+
+        h1 {
+            font-size: 1.75rem;    /* 28px — hero title, dominant αλλά όχι aggressive */
+            font-weight: 600;      /* Semi-bold — σταθερό αλλά soft (όχι 700 bold) */
+            line-height: 1.3;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            margin: 20px 0 20px 0;
+            color: var(--text-strong);
+        }
+
+        p {
+            font-size: 1rem;       /* 16px — body default, αναγνώσιμο */
+            font-weight: 400;      /* Regular — calm reading */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            line-height: 1.6;
+            color: var(--text-strong);
+        }
+
+        
+    /*-------------------- BUTTON TABS */
+
+        body .container .tabs-container .btn-tabs{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-flow: row;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+            body .container .tabs-container .btn-tabs button {
+                font-size: 0.875rem;   /* 14px — compact tabs, δεν "φωνάζουν" */
+                font-weight: 500;      /* Medium — ελαφρύ βάρος για affordance */
+                letter-spacing: 0.01em;
+                width: 130px;
+                height: 30px;
+                background-color: var(--bg-toggle);
+                color: var(--text-toggle);
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            body .container .tabs-container .btn-tabs button:hover {
+                background-color: var(--bg-toggle-hover);
+            }
+
+            body .container .tabs-container .btn-tabs button.active {
+                background-color: var(--bg-toggle-active);
+                color: var(--text-toggle-active);
+            }
+
+            /* .inactive {
+                display: none;
+            } */
+        
+    /*-------------------- BUTTON TABS */
+
+
+
+    /*-------------------- INPUT TABS*/
+
+        body .container .tabs-container .input-tabs {
+            margin-bottom: 30px;
+        }
+
+    /* ----------------------------------  DISTANCE */
+            body .container .tabs-container .input-tabs .distance-inputs {
+                display: grid;
+                height: 140px;
+                grid-template-rows: 90px 1fr;
+                width: 100%;
+                margin: 0 auto;
+                gap: 5px;
+            }
+
+                body .container .tabs-container .input-tabs .distance-inputs p {
+                    text-align: center;
+                    padding: 0;
+                    color: var(--text-strong);
+                }
+
+                body .container .tabs-container .input-tabs  .distance-inputs .input-fields {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                    body .container .tabs-container .input-tabs  .distance-inputs input[type="number"] {
+                        background-color: var(--bg-input);
+                        color: var(--text-input);
+                        padding: 5px;
+                        font-size: 1rem;       /* 16px — αποφεύγει zoom σε mobile */
+                        font-weight: 400;
+                        outline: none;
+                        border: 1px solid var(--border-input);
+                        width: 35%;
+                    }
+
+                    body .container .tabs-container .input-tabs  .distance-inputs input[type="number"]:focus {
+                        border: 1px solid var(--border-input-focus);
+                    }
+
+                    body .container .tabs-container .input-tabs  .distance-inputs input[type="number"]::placeholder {
+                        color: var(--text-placeholder);
+                    }
+    /* ---------------------------------- DISTANCE */
+
+
+    /* ---------------------------------- SPEED */
+            body .container .tabs-container .input-tabs .speed-inputs {
+                display: grid;
+                height: 140px;
+                grid-template-rows: 90px 1fr;
+                width: 100%;
+                margin: 0 auto;
+                gap: 5px;
+            }
+
+                body .container .tabs-container .input-tabs .speed-inputs p {
+                    text-align: center;
+                    padding: 0;
+                    color: var(--text-strong);
+                }
+
+                body .container .tabs-container .input-tabs  .speed-inputs .input-fields {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                    body .container .tabs-container .input-tabs .speed-inputs input[type="number"] {
+                        padding: 5px;
+                        font-size: 1rem;       /* 16px — αποφεύγει zoom σε mobile */
+                        font-weight: 400;
+                        border: 1px solid var(--border-input);
+                        outline: none;
+                        width: 35%;
+                        background-color: var(--bg-input);
+                        color: var(--text-input);
+                    }
+
+                    /* Brave/Chrome/Safari/Edge - κρύβει τα βελάκια */
+                    /* .speed-inputs input[type="number"]::-webkit-inner-spin-button,
+                    .speed-inputs input[type="number"]::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    } */
+
+                    body .container .tabs-container .input-tabs .speed-inputs input[type="number"]:focus {
+                        border: 1px solid var(--border-input-focus);
+                        /* box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.3); */
+                    }
+
+                    body .container .tabs-container .input-tabs .speed-inputs input[type="number"]::placeholder {
+                        color: var(--text-placeholder);
+                    }
+    /* ---------------------------------- SPEED */
+
+
+    /* ---------------------------------- TIME */
+            body .container .tabs-container .input-tabs .time-inputs {
+                display: grid;
+                height: 140px;
+                grid-template-rows: 90px 1fr;
+                width: 100%;
+                margin: 0 auto;
+                gap: 5px;
+            }
+
+                body .container .tabs-container .input-tabs .time-inputs p {
+                    text-align: center;
+                    padding: 0;
+                    color: var(--text-strong);
+                }
+
+                body .container .tabs-container .input-tabs  .time-inputs .input-fields {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                    body .container .tabs-container .input-tabs .time-inputs input[type="number"] {
+                        padding: 5px;
+                        font-size: 1rem;       /* 16px — αποφεύγει zoom σε mobile */
+                        font-weight: 400;
+                        border: 1px solid var(--border-input);
+                        outline: none;
+                        width: 35%;
+                        background-color: var(--bg-input);
+                        color: var(--text-input);
+                    }
+
+                    body .container .tabs-container .input-tabs .time-inputs input[type="number"]:focus {
+                        border: 1px solid var(--border-input-focus);
+                    }
+
+                    body .container .tabs-container .input-tabs .time-inputs input[type="number"]::placeholder {
+                        color: var(--text-placeholder);
+                    }
+
+            .active-input {
+                display: block;
+            }
+
+            .inactive-input {
+                display: none;
+            }
+
+    /* ---------------------------------- TIME */
+
+           
+
+    /*-------------------- INPUT TABS */
+
+
+    /*-------------------- CALCULATE BUTTON */
+
+            body .container .calculate-btn {
+                margin-bottom: 20px;
+            }
+
+                body .container .calculate-btn button {
+                    background-color: var(--bg-btn-calc);
+                    box-shadow: var(--shadow-btn-calc);
+                    border-radius: 10px;
+                    text-align: center;
+                    width: 100%;
+                    height: 45px;
+                    cursor: pointer;
+                    color: var(--text-btn-calc);
+                    border: none;
+                    font-size: 1rem;       /* 16px — ίδιο με body, αλλά έμφαση από χρώμα/weight */
+                    font-weight: 600;      /* Semi-bold — action-oriented, προτρέπει κλικ */
+                    letter-spacing: 0.02em;
+                }
+
+                body .container .calculate-btn button:hover {
+                    background-color: var(--bg-btn-calc-hover);
+                }
+    
+    /*-------------------- CALCULATE BUTTON */
+
+        body .container p {
+            text-align: center;
+            color: var(--text-strong);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            font-weight: 400;
+        }

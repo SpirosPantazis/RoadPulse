@@ -1,0 +1,50 @@
+2. ```css
+[data-theme="dark"] {
+  /* ---------- BASE ---------- */
+  --bg-body:        #020617;
+  --text-strong:    #fbfafc;
+  --text-muted:     #94a3b8;          /* slate 400 — AA στο #0f172a */
+
+  --bg-component:   #0f172a;
+  --border-component: #1e293b;        /* ένα level πάνω από το card */
+  --shadow-component: 0 1px 2px rgba(0,0,0,.4),
+                      0 12px 32px rgba(0,0,0,.45);
+
+  /* ---------- INPUTS ---------- */
+  --bg-input:       #1e293b;
+  --text-input:     #e2e8f0;          /* λευκο-γκρι, καθαρό στο σκούρο */
+  --border-input:   #334155;          /* slate 700 — διακριτικό περίγραμμα */
+  --border-input-focus: #10b981;      /* accent = calculate button */
+  --ring-focus:     rgba(16,185,129,.22);
+  --text-placeholder: #64748b;
+
+  /* ---------- TOGGLE BUTTONS ---------- */
+  --bg-toggle:          #1e293b;
+  --text-toggle:        #94a3b8;      /* inactive */
+  --bg-toggle-hover:    #273449;      /* hover πριν το active */
+  --bg-toggle-active:   #10b981;      /* ίδιο accent → ενιαίο look */
+  --text-toggle-active: #022c22;      /* σκούρο πράσινο, AA πάνω σε emerald */
+
+  /* ---------- CALCULATE BUTTON ---------- */
+  --bg-btn-calc:        #10b981;
+  --text-btn-calc:      #022c22;      /* σκούρο κείμενο > λευκό για αντίθεση */
+  --bg-btn-calc-hover:  #0ea371;      /* ~8% πιο σκούρο */
+  --bg-btn-calc-active: #0b8a60;
+  --shadow-btn-calc:    0 6px 18px rgba(16,185,129,.28);
+}
+```
+
+**Γρήγορη λογική πίσω από κάθε τιμή:**
+
+| Κενό | Τιμή | Λόγος |
+|---|---|---|
+| text muted | `#94a3b8` | Slate 400, ~7:1 πάνω στο card |
+| input text | `#e2e8f0` | Πιο μαλακό από pure white, λιγότερο glare |
+| border component | `#1e293b` | Ίδιο με toggle/input bg → οπτική συνοχή layers |
+| border input | `#334155` | Ελαφρώς φωτεινότερο ώστε να φαίνεται το框 |
+| toggle text | `#94a3b8` | Ίδιο με muted → "ανενεργό" signal |
+| toggle active bg | `#10b981` | Το μόνο bright στοιχείο = πάντα το accent |
+| calc text | `#022c22` | Λευκό στο `#10b981` πέφτει κάτω από AA· σκούρο περνάει άνετα |
+| calc hover | `#0ea371` | Σκούρυνση (σε dark mode το hover συνήθως σκουραίνει, όχι φωτίζει) |
+
+Αν θες το toggle active **λιγότερο δυνατό**, εναλλακτική: `--bg-toggle-active: #334155` + `--text-toggle-active: #34d399` (χρωματιστό κείμενο αντί γεμίσματος).

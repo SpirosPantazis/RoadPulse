@@ -1,0 +1,39 @@
+------------------------------------------
+input fields
+
+validate functions - completed
+
+data-target - completed
+
+event handlers completed
+
+initialize repository
+
+responsive
+
+------------------------------------------
+
+υπολογισμός απόστασης από σε ένα σημείο σε ένα άλλο με βάση την ταχύτητα και τον χρόνο
+
+υπολογισμός ταχύτητας για μια συγκεκριμένη απόσταστη σε χιλιόμετρα με βάση την χιλιομετρικη απόσταση και τον χρόνο που χρειάζεται να διανύσεις την απόσταση
+
+υπολογιμός χρόνου για μία συγκεκριμένη απόσταση σε λεπτά η ώρες με βάση την χιλιομετρική απόσταση και την ταχύτητα.
+
+:root {
+    --bg-body: #020617;
+    --bg-component: #0f172a;
+    --text-main: #fbfafc;
+    --text-muted: #94a3b8;;
+    --bg-input: ##1e293b;
+    --border-colour: #1e293b;
+
+    /* ------------------  TOGGLE BUTTONS*/
+    --bg-toggle: #1e293b ;
+    --text-toggle: #0f172a;
+    --bg-toggle-active: #64748B;
+
+    /* ------------------  RESULT BUTTON EMPHASIZE */
+    --bg-cta: #10b981;
+    --text-cta: #FFFFFF;
+    --bg-cta-hover: #1D4ED8;
+}

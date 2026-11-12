@@ -1,0 +1,55 @@
+3. calm and paster 
+
+css
+
+:root {
+  /* ---------- BASE ---------- */
+  --bg-body:        #EAE5D9;
+  --text-strong:    #2c3e50;
+  --text-muted:     #7f8c8d;          /* warm grey — διακριτικό, αλλά διαβάσιμο */
+  
+  --bg-component:   #f4f1ea;
+  --border-component: #dcd6cc;        /* beige-adjacent, ένα level πιο σκούρο από card */
+  --shadow-component: 0 4px 12px rgba(44, 62, 80, .06),
+                      0 1px 3px rgba(44, 62, 80, .04);
+
+  /* ---------- INPUTS ---------- */
+  --bg-input:       #ffffff;
+  --text-input:     #2c3e50;          /* ίδιο με main text = consistency */
+  --border-input:   #dcd6cc;          /* ίδιο με component border = flat look */
+  --border-input-focus: #e67e22;      /* accent = calculate button */
+  --ring-focus:     rgba(230, 126, 34, .15);
+  --text-placeholder: #b0a898;        /* soft beige-γκρι, δεν "φωνάζει" */
+
+  /* ---------- TOGGLE BUTTONS ---------- */
+  --bg-toggle:          #e6dfd3;      /* beige (δικό σου) */
+  --text-toggle:        #5a6c7c;      /* muted blue-gray — ταιριάζει με #2c3e50 */
+  --bg-toggle-hover:    #ddd5c7;      /* ~2% πιο σκούρο beige */
+  --bg-toggle-active:   #e67e22;      /* accent orange */
+  --text-toggle-active: #ffffff;      /* λευκό πάνω σε orange → AA περνάει */
+
+  /* ---------- CALCULATE BUTTON ---------- */
+  --bg-btn-calc:        #e67e22;
+  --text-btn-calc:      #ffffff;      /* λευκό, contrast 4.5:1+ πάνω σε #e67e22 */
+  --bg-btn-calc-hover:  #d35400;      /* darker warm orange — περνάει AA */
+  --bg-btn-calc-active: #c0392b;      /* shift toward warm red για depth */
+  --shadow-btn-calc:    0 4px 14px rgba(230, 126, 34, .30);
+}
+```
+///////////////////////////////////////////////////////////////////////////////////////
+**Γρήγορη λογική:**
+
+| Κενό | Τιμή | Λόγος |
+|---|---|---|
+| text muted | `#7f8c8d` | Classic flat-ui grey, ταιριάζει με το "calm" vibe |
+| input text | `#2c3e50` | Ίδιο με heading = οπτική ενότητα |
+| border component | `#dcd6cc` | Warm beige-γκρι, δεν "κόβει" το pastels |
+| border input | `#dcd6cc` | Ίδιο με component → seamless flat look |
+| toggle text | `#5a6c7c` | Muted blue-gray, ταιριάζει με το #2c3e50 παλέτα |
+| toggle active | `#e67e22` / `#ffffff` | Accent orange + λευκό = καθαρό contrast |
+| calc hover | `#d35400` | Σκούρο orange, διακριτική αλλαγή χωρίς να "πηδάει" |
+| calc active | `#c0392b` | Ελαφρύ shift σε warm red για tactile feeling |
+
+**Tip:** Το `#EAE5D9` (body) και `#f4f1ea` (component) είναι πολύ κοντά. Αν θες πιο καθαρό διαχωρισμό, βάλε `--border-component: #dcd6cc` με `box-shadow` — αυτό που έχω ήδη κάνει.
+
+///////////////////////////////////////////////////////////////////////////////////////

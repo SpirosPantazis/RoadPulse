@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Distance</title>
+    <link rel="stylesheet" href="calculate-distance.css">
+</head>
+<body>
+    <div class="container">
+            <!-- HEADER -->
+            <h1>Επέλεξε τον τρόπο υπολογισμού</h1>
+   
+            <!-- MAIN -->
+            <!-- SECTION TABS CONTAINER-->
+            <div class="tabs-container">
+                <!-- section button tabs -->
+                <div class="btn-tabs" id="btnTabs">
+                    <button type="button" data-target="#distance" class="btn-active distance-btn active">Απόσταση</button>
+                    <button type="button" data-target="#speed" class="btn-active speed-btn">Ταχύτητα</button>
+                    <button type="button" data-target="#time" class="btn-active time-btn">Χρόνος</button>
+                </div>
+                <!-- section button tabs -->
+                <!-- section input tabs -->
+                <div class="input-tabs" id="inputTabs">
+                    <div id="distance" class="set-active-distance tab-content active-input">
+                        <div class="distance-inputs">
+                            <div class="paragraph-description">
+                                <p class="description">
+                                    Υπολογισμός απόστασης από σε ένα σημείο σε ένα άλλο, με βάση την ταχύτητα και τον
+                                    χρόνο.
+                                </p>
+                            </div>
+                            <div class="input-fields">
+                                <input id="speedForDistance" class="js-speed-input" type="number" placeholder="Speed">
+                                <input id="timeForDistance" class="js-time-input" type="number" placeholder="Time">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="speed" class="set-active-speed tab-content inactive-input">
+                        <div class="speed-inputs">    
+                            <div class="paragraph-description">
+                                <p class="description">
+                                    Υπολογισμός ταχύτητας για μια συγκεκριμένη απόσταστη σε χιλιόμετρα ανα ωρα, με βάση την 
+                                    χιλιομετρικη απόσταση και τον χρόνο που χρειάζεται να διανύσεις την απόσταση.
+                                </p>
+                            </div>
+                            <div class="input-fields">
+                                <input type="number" id="distanceForSpeed" placeholder="Distance(km)">
+                                <input type="number" id="timeForSpeed" placeholder="Time">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="time" class="set-active-time tab-content inactive-input">
+                        <div class="time-inputs">
+                            <div class="paragraph-description">
+                                <p class="description">
+                                    Υπολογισμός χρόνου για μία συγκεκριμένη απόσταση σε ώρες, με βάση την 
+                                    χιλιομετρική απόσταση και την ταχύτητα.
+                                </p>
+                            </div>
+                            <div class="input-fields">
+                                <input id="distanceForTime" type="number" placeholder="Distance">
+                                <input id="speedForTime" type="number" placeholder="Speed">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- section input tabs -->
+            </div>
+            
+
+            <!-- FOOTER -->
+             <!-- SECTION RESULT-->
+             <div class="result">
+                <div class="calculate-btn"><button id="calculateBtn" class="Calculate-btn">Υπολογισμός</button></div>
+                <p class="calculation-result" id="result">0</p>
+             </div>
+    </div>
+    <script src="calculate-distance.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+inputs/ font-sizes/ colours
+------------------------------------------------------------------------------------
+
+Font sizes - Font weight
+   h1, p, toggle buttons text and calculate button text
+
+1. 
+   ```css
+/* Typography Scale — Calm & Pastel */
+
+h1 {
+  font-size: 1.75rem;    /* 28px — hero title, dominant αλλά όχι aggressive */
+  font-weight: 600;      /* Semi-bold — σταθερό αλλά soft (όχι 700 bold) */
+  line-height: 1.3;
+}
+
+p {
+  font-size: 1rem;       /* 16px — body default, αναγνώσιμο */
+  font-weight: 400;      /* Regular — calm reading */
+  line-height: 1.6;
+}
+
+.toggle-btn {
+  font-size: 0.875rem;   /* 14px — compact tabs, δεν "φωνάζουν" */
+  font-weight: 500;      /* Medium — ελαφρύ βάρος για affordance */
+  letter-spacing: 0.01em;
+}
+
+.btn-calc {
+  font-size: 1rem;       /* 16px — ίδιο με body, αλλά έμφαση από χρώμα/weight */
+  font-weight: 600;      /* Semi-bold — action-oriented, προτρέπει κλικ */
+  letter-spacing: 0.02em;
+}
+``````css
+/* ---------- Extras (labels, placeholder, result) ---------- */
+
+.field label {
+  font-size: 0.75rem;    /* 12px — micro-label, δευτερεύον ρόλο */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+input {
+  font-size: 1rem;       /* 16px — αποφεύγει zoom σε mobile */
+  font-weight: 400;
+}
+
+.result {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.result strong {
+  font-size: 1.375rem;   /* 22px — το νούμερο "μιλάει" περισσότερο */
+  font-weight: 700;
+  color: var(--bg-btn-calc);
+}
+```
+
+**Γιατί αυτή η κλίμακα:**
+
+| Στοιχείο | Size | Weight | Λόγος |
+|---|---|---|---|
+| h1 | 28px | 600 | Μισό βήμα κάτω από "bold hero" → ταιριάζει στο pastel/calm ύφος |
+| p | 16px | 400 | Default· με `line-height 1.6` ανάμεσα σε beige panels διαβάζεται άνετα |
+| Toggle | 14px | 500 | Τα tabs δεν πρέπει να ανταγωνίζονται το h1· medium δίνει clickability |
+| Calculate | 16px | 600 | Ίδιο μέγεθος με body αλλά πιο βαρύ → ξεχωρίζει χωρίς να μεγαλώνει |
+
+**Δύο tips:**
+
+- Κράτα τα μεγέθη σε `rem`, ώστε αν ο χρήστης αλλάξει το base font size του browser, όλο το component κλιμακώνεται.
+- Απόφυγε `font-weight: 700` παντού — στο `#f4f1ea` background το bold δείχνει "βαρύ" και σπάει το calm αίσθημα. Κράτα το 700 μόνο για το αποτέλεσμα (`result strong`).
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+:root {
+    --bg-body: #020617;
+    --bg-component: #0f172a;
+    --text-main: #fbfafc;
+    --text-muted: #94a3b8;;
+    --bg-input: ##1e293b;
+    --border-colour: #1e293b;
+
+    /* ------------------  TOGGLE BUTTONS*/
+    --bg-toggle: #1e293b ;
+    --text-toggle: #0f172a;
+    --bg-toggle-active: #64748B;
+
+    /* ------------------  RESULT BUTTON EMPHASIZE */
+    --bg-cta: #10b981;
+    --text-cta: #FFFFFF;
+    --bg-cta-hover: #1D4ED8;
+}

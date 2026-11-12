@@ -1,0 +1,31 @@
+1. :root {
+  /* ===== Modern & clean (light) ===== */
+  --bg-body:        #f1f5f0;
+  --bg-surface:     #ffffff;
+
+  /* ---------- COMPONENT ---------- */
+  --bg-component:   #f8fafc;
+  --border-component: #e2e8f0;          /* οριακά πιο σκούρο από το φόντο */
+  --shadow-component: 0 1px 2px rgba(15, 23, 42, .04),
+                      0 8px 24px rgba(15, 23, 42, .06);
+
+  --text-strong:    #0f172a;
+  --text-muted:     #64748b;            /* labels, hint text */
+
+  /* ---------- TOGGLE BUTTONS ---------- */
+  --bg-toggle:          #e2ebfd;
+  --text-toggle:        #475569;        /* inactive → muted slate */
+  --bg-toggle-hover:    #d3e0fb;        /* hover πριν το active */
+
+  --bg-toggle-active:   #2563eb;        /* primary */
+  --text-toggle-active: #ffffff;
+
+  /* ---------- INPUT FIELDS ---------- */
+  --bg-input:       #ffffff;
+  --border-input:   #cbd5e1;
+  --border-input-focus: #2563eb;
+  --ring-focus:     rgba(37, 99, 235, .16);
+  --text-placeholder: #94a3b8;
+}
+
+------------------------------------------------------------------------------------

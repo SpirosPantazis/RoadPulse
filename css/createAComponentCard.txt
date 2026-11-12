@@ -1,0 +1,474 @@
+Παρακάτω σου δίνω ένα πλήρες, έτοιμο component (HTML + CSS + JS) με **όλα τα χρώματα ορισμένα** — 
+base palette, states (hover/active/focus), σκιά, border, disabled κ.λπ. Είναι στα ελληνικά, 
+ταιριάζει με το page που μου έστειλες ("Επέλεξε τον τρόπο υπολογισμού 
+/ Απόσταση – Ταχύτητα – Χρόνος").
+
+
+```html
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Υπολογισμός Ταχύτητας</title>
+<style>
+  :root {
+    /* ===== Palette ===== */
+    --bg-page:        #eef2f7;
+    --bg-card:        #ffffff;
+    --bg-subtle:      #f5f7fa;
+    --bg-input:       #f0f3f8;
+
+    --primary:        #4f46e5;   /* indigo */
+    --primary-hover:  #4338ca;
+    --primary-soft:   #eef0fe;
+
+    --accent:         #06b6d4;   /* cyan */
+    --accent-soft:    #e0f7fb;
+
+    --success:        #16a34a;
+    --success-soft:   #dcfce7;
+    --error:          #dc2626;
+    --error-soft:     #fee2e2;
+
+    --text-strong:    #0f172a;
+    --text-body:      #334155;
+    --text-muted:     #64748b;
+    --text-invert:    #ffffff;
+
+    --border:         #dbe1ea;
+    --border-focus:   #4f46e5;
+    --ring:           rgba(79, 70, 229, 0.18);
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06);
+    --shadow-md: 0 10px 30px rgba(15, 23, 42, .10);
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #e5e9ff 0%, var(--bg-page) 60%);
+    color: var(--text-body);
+  }
+
+  .calc-card {
+    width: min(420px, 100%);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 22px;
+  }
+
+  .calc-title {
+    margin: 0 0 4px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .calc-subtitle {
+    margin: 0 0 18px;
+    font-size: .82rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  /* ===== Tabs: Απόσταση / Ταχύτητα / Χρόνος ===== */
+  .seg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 5px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    margin-bottom: 18px;
+  }
+
+  .seg-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 9px 6px;
+    border-radius: var(--radius-pill);
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease, box-shadow .18s ease;
+  }
+
+  .seg-btn:hover { color: var(--primary); background: var(--primary-soft); }
+
+  .seg-btn[aria-selected="true"] {
+    background: var(--primary);
+    color: var(--text-invert);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .seg-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--ring);
+  }
+
+  /* ===== Fields ===== */
+  .field { margin-bottom: 14px; }
+
+  .field label {
+    display: block;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .input-wrap { position: relative; }
+
+  .field input {
+    width: 100%;
+    padding: 12px 54px 12px 14px;
+    font-size: .95rem;
+    color: var(--text-strong);
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+
+  .field input::placeholder { color: #9aa6b8; }
+
+  .field input:hover { border-color: #c3ccda; }
+
+  .field input:focus {
+    outline: none;
+    background: var(--bg-card);
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 4px var(--ring);
+  }
+
+  .unit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    pointer-events: none;
+  }
+
+  .field.is-hidden { display: none; }
+
+  /* ===== Submit ===== */
+  .btn-calc {
+    width: 100%;
+    margin-top: 6px;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 130%);
+    color: var(--text-invert);
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, .28);
+    transition: transform .12s ease, filter .18s ease, box-shadow .18s ease;
+  }
+
+  .btn-calc:hover { filter: brightness(1.06); box-shadow: 0 10px 24px rgba(79, 70, 229, .34); }
+  .btn-calc:active { transform: translateY(1px); }
+  .btn-calc:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; }
+
+  /* ===== Result ===== */
+  .result {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    background: var(--success-soft);
+    border: 1px solid #bbf7d0;
+    color: #14532d;
+    font-size: .92rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .result strong { font-size: 1.25rem; color: var(--success); }
+
+  .result.is-error {
+    background: var(--error-soft);
+    border-color: #fecaca;
+    color: #7f1d1d;
+  }
+  .result.is-error strong { color: var(--error); }
+</style>
+</head>
+
+
+<body>
+
+<form class="calc-card" id="calcForm" novalidate>
+  <h2 class="calc-title">Επέλεξε τον τρόπο υπολογισμού</h2>
+  <p class="calc-subtitle">
+    Υπολογισμός ταχύτητας για μια συγκεκριμένη απόσταση σε χιλιόμετρα, με βάση τη
+    χιλιομετρική απόσταση και τον χρόνο που χρειάζεται να τη διανύσεις.
+  </p>
+
+  <div class="seg" role="tablist" aria-label="Τρόπος υπολογισμού">
+    <button type="button" class="seg-btn" role="tab" data-mode="speed" aria-selected="true">Απόσταση</button>
+    <button type="button" class="seg-btn" role="tab" data-mode="distance" aria-selected="false">Ταχύτητα</button>
+    <button type="button" class="seg-btn" role="tab" data-mode="time" aria-selected="false">Χρόνος</button>
+  </div>
+
+  <div class="field" data-field="distance">
+    <label for="distance">Απόσταση</label>
+    <div class="input-wrap">
+      <input id="distance" type="number" min="0" step="any" placeholder="π.χ. 150" />
+      <span class="unit">χλμ</span>
+    </div>
+  </div>
+
+  <div class="field" data-field="speed">
+    <label for="speed">Ταχύτητα</label>
+    <div class="input-wrap">
+      <input id="speed" type="number" min="0" step="any" placeholder="π.χ. 75" />
+      <span class="unit">χλμ/ώ</span>
+    </div>
+  </div>
+
+  <div class="field" data-field="time">
+    <label for="time">Χρόνος</label>
+    <div class="input-wrap">
+      <input id="time" type="number" min="0" step="any" placeholder="π.χ. 2" />
+      <span class="unit">ώρες</span>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-calc">Υπολογισμός</button>
+
+  <output class="result is-hidden" id="result" style="display:none"></output>
+</form>
+
+<script>
+  const form = document.getElementById('calcForm');
+  const result = document.getElementById('result');
+  const tabs = [...document.querySelectorAll('.seg-btn')];
+  const fields = {
+    distance: document.querySelector('[data-field="distance"]'),
+    speed:    document.querySelector('[data-field="speed"]'),
+    time:     document.querySelector('[data-field="time"]')
+  };
+
+  // Ποιο πεδίο μένει κενό (αυτό που υπολογίζουμε) ανά mode
+  const solveFor = { speed: 'speed', distance: 'distance', time: 'time' };
+  let mode = 'speed';
+
+  function render() {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
+    Object.entries(fields).forEach(([key, el]) => {
+      el.classList.toggle('is-hidden', key === solveFor[mode]);
+    });
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    mode = tab.dataset.mode;
+    render();
+  }));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const num = id => parseFloat(document.getElementById(id).value);
+    const d = num('distance'), s = num('speed'), t = num('time');
+    const target = solveFor[mode];
+    const needed = target === 'speed' ? [d, t] : target === 'distance' ? [s, t] : [d, s];
+
+    if (needed.some(v => !isFinite(v) || v <= 0)) {
+      return show('Συμπλήρωσε σωστά όλα τα πεδία.', true);
+    }
+
+    let value, unit;
+    if (target === 'speed')     { value = d / t;             unit = 'χλμ/ώ'; }
+    else if (target === 'distance') { value = s * t;         unit = 'χλμ'; }
+    else                        { value = d / s;             unit = 'ώρες'; }
+
+    show(`Αποτέλεσμα: <strong>${value.toFixed(2)}</strong> ${unit}`, false);
+  });
+
+  function show(html, isError) {
+    result.style.display = 'flex';
+    result.classList.toggle('is-error', isError);
+    result.innerHTML = isError ? html : html;
+  }
+
+  render();
+</script>
+</body>
+</html>
+```
+
+**Τα χρώματα που πρόσθεσα (και πού πάνε):**
+
+| Ρόλος | Variable | Τιμή |
+|---|---|---|
+| Φόντο σελίδας / card | `--bg-page`, `--bg-card` | `#eef2f7`, `#fff` |
+| Κύριο (buttons, active tab) | `--primary` | `#4f46e5` indigo |
+| Έμφαση μονάδες | `--accent` | `#06b6d4` cyan |
+| Κείμενα | `--text-strong/body/muted` | slate scale |
+| Borders / focus ring | `--border`, `--ring` | `#dbe1ea`, indigo 18% |
+| Επιτυχία / σφάλμα | `--success`, `--error` | `#16a34a`, `#dc2626` |
+
+Θες να στο κάνω React/Vue component, ή με dark mode toggle;```jsx
+// SpeedCalculator.jsx — React version (ίδια palette, dark mode toggle)
+import { useState } from 'react';
+
+const MODES = [
+  { id: 'speed',    label: 'Απόσταση' },
+  { id: 'distance', label: 'Ταχύτητα' },
+  { id: 'time',     label: 'Χρόνος' },
+];
+
+export default function SpeedCalculator() {
+  const [mode, setMode] = useState('speed');
+  const [values, setValues] = useState({ distance: '', speed: '', time: '' });
+  const [result, setResult] = useState(null); // { text, unit } | { error }
+  const [dark, setDark] = useState(false);
+
+  const solveFor = { speed: 'speed', distance: 'distance', time: 'time' }[mode];
+  const fields = [
+    { key: 'distance', label: 'Απόσταση', unit: 'χλμ' },
+    { key: 'speed',    label: 'Ταχύτητα', unit: 'χλμ/ώ' },
+    { key: 'time',     label: 'Χρόνος',   unit: 'ώρες' },
+  ];
+
+  const submit = (e) => {
+    e.preventDefault();
+    const n = (k) => parseFloat(values[k]);
+    const needed = solveFor === 'speed' ? ['distance','time']
+                 : solveFor === 'distance' ? ['speed','time']
+                 : ['distance','speed'];
+
+    if (needed.some(k => !isFinite(n(k)) || n(k) <= 0)) {
+      return setResult({ error: 'Συμπλήρωσε σωστά όλα τα πεδία.' });
+    }
+
+    if (solveFor === 'speed') {
+      setResult({ text: (n('distance') / n('time')).toFixed(2), unit: 'χλμ/ώ' });
+    } else if (solveFor === 'distance') {
+      setResult({ text: (n('speed') * n('time')).toFixed(2), unit: 'χλμ' });
+    } else {
+      setResult({ text: (n('distance') / n('speed')).toFixed(2), unit: 'ώρες' });
+    }
+  };
+
+  return (
+    <div className={`calc-card ${dark ? 'is-dark' : ''}`}>
+      <button type="button" className="theme-toggle" onClick={() => setDark(d => !d)}>
+        {dark ? '☀️ Φωτεινό' : '🌙 Σκοτεινό'}
+      </button>
+
+      <h2 className="calc-title">Επέλεξε τον τρόπο υπολογισμού</h2>
+      <p className="calc-subtitle">
+        Υπολογισμός ταχύτητας για μια συγκεκριμένη απόσταση σε χιλιόμετρα, με βάση τη
+        χιλιομετρική απόσταση και τον χρόνο που χρειάζεται να τη διανύσεις.
+      </p>
+
+      <div className="seg" role="tablist">
+        {MODES.map(m => (
+          <button key={m.id} type="button" role="tab" className="seg-btn"
+            aria-selected={mode === m.id} onClick={() => setMode(m.id)}>
+            {m.label}
+          </button>
+        ))}
+      </div>
+
+      <form onSubmit={submit} noValidate>
+        {fields.filter(f => f.key !== solveFor).map(f => (
+          <div className="field" key={f.key}>
+            <label htmlFor={f.key}>{f.label}</label>
+            <div className="input-wrap">
+              <input id={f.key} type="number" min="0" step="any"
+                value={values[f.key]}
+                onChange={e => setValues(v => ({ ...v, [f.key]: e.target.value }))} />
+              <span className="unit">{f.unit}</span>
+            </div>
+          </div>
+        ))}
+
+        <button type="submit" className="btn-calc">Υπολογισμός</button>
+
+        {result && (
+          <output className={`result ${result.error ? 'is-error' : ''}`}>
+            {result.error ? result.error
+              : <>Αποτέλεσμα: <strong>{result.text}</strong> {result.unit}</>}
+          </output>
+        )}
+      </form>
+    </div>
+  );
+}
+```
+
+```css
+/* SpeedCalculator.css — πρόσθεσε το dark-mode layer */
+.calc-card.is-dark {
+  --bg-page:       #0b1120;
+  --bg-card:       #111827;
+  --bg-subtle:     #1f2937;
+  --bg-input:      #1a2333;
+
+  --primary:       #818cf8;
+  --primary-hover: #6366f1;
+  --primary-soft:  rgba(129, 140, 248, .14);
+
+  --accent:        #22d3ee;
+  --accent-soft:   rgba(34, 211, 238, .14);
+
+  --text-strong:   #f1f5f9;
+  --text-body:     #cbd5e1;
+  --text-muted:    #94a3b8;
+
+  --border:        #273244;
+  --border-focus:  #818cf8;
+  --ring:          rgba(129, 140, 248, .25);
+
+  --success:       #4ade80;
+  --success-soft:  rgba(74, 222, 128, .12);
+  --error:         #f87171;
+  --error-soft:    rgba(248, 113, 113, .12);
+
+  background: var(--bg-card);
+  color: var(--text-body);
+}
+
+.theme-toggle {
+  float: right;
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: .74rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--primary); border-color: var(--primary); }
+```
+
+**Σημείωση για τα tabs:** στο UI η σειρά είναι "Απόσταση / Ταχύτητα / Χρόνος", αλλά το κάθε tab επιλέγει *τι λύνεις*. Αν θες η ετικέτα να δείχνει πάντα το αγνώστοτο (π.χ. tab "Ταχύτητα" → βρίσκει ταχύτητα), άσε το `solveFor` map ως έχει — απλά άλλαξε τα `label` στο `MODES`.
