@@ -39,13 +39,15 @@ function calculateSpeed() {
 function calculateTime() {
     const distance = document.getElementById("distanceForTime").valueAsNumber;
     const speed = document.getElementById("speedForTime").valueAsNumber;
+    const minutes = (Math.round(((distance / speed) * 60 )% 60));
+    console.log(minutes.toFixed(2));
 
     if (isNaN(distance) || isNaN(speed)) {
         return "Εισάγετε ένα αριθμό.";
     } else if (speed <= 0 || distance <= 0) {
         return "Εισάγετε ένα θετικό αριθμό.";
     } else {
-        return Math.round(((distance / speed)).toFixed(2)) + " Hours";
+        return Math.round(((distance / speed)).toFixed(2)) + " Hours " + minutes + " minutes";
     }
 }
 
