@@ -4,8 +4,6 @@ const container = document.getElementById("btnTabs");
 const inputsTabs = document.querySelectorAll(".tab-content");
 const buttonTabs = container.querySelectorAll(".btn-active");
 let currentTab = "distance"; // track which tab is active
-// console.log(buttonTabs);
-// console.log(inputsTabs);
 
 function calculateDistance() {
     const speed = document.getElementById("speedForDistance").valueAsNumber;
@@ -79,7 +77,7 @@ container.addEventListener('click', (e) => {
     currentTab = targetSelector.replace("#", "");
 });
                 
-
+    // --- Calculate Btn ---
 calculateButton.addEventListener("click", function showResult(e) {
     if(currentTab === "distance") { elem.innerText = calculateDistance()}
     else if(currentTab === "speed") {elem.innerText = calculateSpeed()}
